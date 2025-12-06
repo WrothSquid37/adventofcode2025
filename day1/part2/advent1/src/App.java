@@ -10,13 +10,18 @@ public class App {
 
         File file = new File("src/input.txt");
 
-        int rotation = 0;
+        String unparsedNumber;
+        int parsedNum = 0;
 
-        int parsedNum;
+        int rotation = 50;
+
+        int click = 0;
+
+        int total = 0;
 
         ArrayList<String> lineList = new ArrayList<String>();
 
-        // Read the file and then close the file (try-with-resources)
+        // Read the file and then close the file
         try (Scanner reader = new Scanner(file)) {
             while (reader.hasNextLine()) {
                 String data = reader.nextLine();
@@ -27,24 +32,28 @@ public class App {
             e.printStackTrace();
         }
 
-        String num;
+
         
         for (String s : lineList) {
             char operator = s.charAt(0);
-            if (operator == 'R') {
-                num = s.substring(1);
-                parsedNum = Integer.parseInt(num);
-                System.out.println(num);
+            unparsedNumber = s.substring(1);
+            parsedNum = Integer.parseInt(unparsedNumber);
+            if (operator == 'L') {
+                rotation -= parsedNum;
+                click = click % 100;
             }
-            else if (operator == 'L') {
-                num = s.substring(1);
-                parsedNum = Integer.parseInt(num);
-                System.out.println(num);
+            else if (operator == 'R') {
+                rotation += parsedNum;
+                click = click % 100;
             }
-            
+            System.out.println(Math.floor(parsedNum / 100));
+            total += Math.floor(parsedNum / 100);
+            if (click == 0) {
+                total++;
+            }
         }
 
-        //System.out.println(total);
+        System.out.println(total);
 
 
     
