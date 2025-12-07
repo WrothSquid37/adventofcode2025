@@ -30,13 +30,13 @@ public class App {
                 
                 int midpoint = Long.toString(i).length() / 2;
 
-                String firstHalf = Long.toString(i).substring(0, midpoint-1);
+                String firstHalf = Long.toString(i).substring(0, midpoint);
                 String lastHalf = Long.toString(i).substring(midpoint, Long.toString(i).length());
 
                 // System.out.print("First Half: " + firstHalf + " Last Half: " + lastHalf);
                 // System.out.println(" Current Num: " + i);
 
-                if (firstHalf == lastHalf) {
+                if (firstHalf.equals(lastHalf)) {
                     count += i;
                 }
 
