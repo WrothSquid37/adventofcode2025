@@ -19,7 +19,7 @@ public class App {
 
     }
 
-    static boolean check_if_nth_duplicates (ArrayList<String> strs, int count) {
+    static boolean check_if_nth_duplicates (ArrayList<String> strs) {
 
         HashSet<String> set = new HashSet<>();
 
@@ -29,9 +29,7 @@ public class App {
 
         }
 
-        int calcCount = strs.size() - set.size();
-
-        return calcCount >= count;
+        return set.size() == 1;
 
     }
 
@@ -63,11 +61,11 @@ public class App {
                 
                 String numStr = Long.toString(i);
 
-                for (int c = numStr.length(); c >= 1; c--) {
+                for (int c = 1; c <= numStr.length()/2; c++) {
 
-                    ArrayList<String> splitString = get_every_nth_chunk(numStr, c);
-
-                    if (check_if_nth_duplicates(splitString, 2)) {
+                    ArrayList<String> splitStrings = get_every_nth_chunk(numStr, c);
+ 
+                    if (check_if_nth_duplicates(splitStrings)) {
                         count += i;
                         break;
                     }
