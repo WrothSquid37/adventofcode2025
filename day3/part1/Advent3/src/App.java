@@ -61,7 +61,7 @@ public class App {
             for (int i = 0; i < numList.size(); i++) {
                 if (numList.get(i) == firstHighest && i == 0) {
                     firstHalfList = new ArrayList<>();
-                    secondHalfList = new ArrayList<>(numList.subList(1, numList.size()-1));
+                    secondHalfList = new ArrayList<>(numList.subList(1, numList.size()));
                     state = PrgmState.ENDSPLIT;
                     break;
                 }
@@ -73,7 +73,7 @@ public class App {
                 }
                 else if (numList.get(i) == firstHighest) {
                     firstHalfList = new ArrayList<>(numList.subList(0, i));
-                    secondHalfList = new ArrayList<>(numList.subList(i+1, numList.size()-1));
+                    secondHalfList = new ArrayList<>(numList.subList(i+1, numList.size()));
                     state = PrgmState.MIDDLESPLIT;
                     break;
                 }                
