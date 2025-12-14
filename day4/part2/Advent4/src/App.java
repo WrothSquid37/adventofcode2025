@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import Helper.ExpandGrid;
 import FileHandler.*;
@@ -8,35 +9,43 @@ public class App {
         
         int forkliftableRolls = 0;
 
+        Scanner input = new Scanner(System.in);
+
         ArrayList<String> gridUnformatted = FileCustomReader.ReadFileToStringArrayList("src/input.txt");
 
+        ExpandGrid nextGrid = new ExpandGrid(gridUnformatted);
         ExpandGrid mainGrid = new ExpandGrid(gridUnformatted);  
-        ExpandGrid visualGrid = new ExpandGrid(gridUnformatted);    
 
-        int[][] cps = { 
-            {-1, 1}, {0, 1}, {1, 1},
-            {-1, 0},         {1, 0},
-            {-1,-1}, {0,-1}, {1,-1},
-        };
+        boolean state = true;
 
-        for (int y = 0; y < mainGrid.rows; y++) {
-            for (int x = 0; x < mainGrid.cols; x++) {
-                int nCount = 0;
-                if (mainGrid.getPos(x, y) == '@') {
-                    for (int[] si : cps) {
-                        
-                        if (mainGrid.getPos(x+si[0], y+si[1]) == '@' && mainGrid.getPos(x+si[0], y+si[1]) != '?') {
-                            nCount++;
-                        }
-                    }
-                    if (nCount < 4) {
-                        forkliftableRolls++;
+        int amountRemoved = -1, total = 0;
+    
+        
+        while (amountRemoved != 0) {
+            amountRemoved = 0;
+            for (int y = 0; y < mainGrid.rows; y++) {
+                for (int x = 0; x < mainGrid.cols; x++) {
+                    if (mainGrid.countNeighbors(x, y, '@') < 4) {
+                        nextGrid.ModifyPos(x, y, '.');
+                        total += 1;
+                        amountRemoved += 1;
                     }
                 }
             }
+
+            System.out.println(amountRemoved);
+            mainGrid.CopyOverSelf(nextGrid);
+
+            System.out.println("--------Main Grid Pre.-----------");
+            mainGrid.PrintOutGrid();
+            System.out.println("--------Next Grid Pre------------");
+            nextGrid.PrintOutGrid();
+            System.out.println("-------------END-----------------");
+
+            input.nextLine();
         }
         
-        System.out.println(forkliftableRolls);
+        System.out.println(total);
         
     }
 }

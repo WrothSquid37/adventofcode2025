@@ -8,6 +8,12 @@ public class ExpandGrid {
 
     public int cols = 0, rows = 0;
 
+    int[][] cps = { 
+        {-1, 1}, {0, 1}, {1, 1},
+        {-1, 0},         {1, 0},
+        {-1,-1}, {0,-1}, {1,-1},
+    };
+
     public ExpandGrid(ArrayList<String> gridStringInput) {
 
         for (String line : gridStringInput) {
@@ -51,4 +57,22 @@ public class ExpandGrid {
         System.out.println("Cols: " + cols + " Rows: " + rows);
     }
 
+    public int countNeighbors(int x, int y, char requiredChar) {
+
+        int count = 0;
+        
+        if (getPos(x, y) != requiredChar) return -1;
+
+        for (int[] si : cps) {              
+            if (getPos(x+si[0], y+si[1]) == '@' && getPos(x+si[0], y+si[1]) != '?') {
+                count++;
+            }
+        }  
+
+        return count;
+    }
+
+    public void CopyOverSelf(ExpandGrid tGrid) {
+        grid = tGrid.grid;
+    }
 }
