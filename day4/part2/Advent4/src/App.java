@@ -25,7 +25,7 @@ public class App {
             amountRemoved = 0;
             for (int y = 0; y < mainGrid.rows; y++) {
                 for (int x = 0; x < mainGrid.cols; x++) {
-                    if (mainGrid.countNeighbors(x, y, '@') < 4) {
+                    if (mainGrid.countNeighbors(x, y, '@') < 4 && mainGrid.countNeighbors(x, y, '@') != -1) {
                         nextGrid.ModifyPos(x, y, '.');
                         total += 1;
                         amountRemoved += 1;
@@ -33,16 +33,27 @@ public class App {
                 }
             }
 
-            System.out.println(amountRemoved);
+            
+            
+
+            // System.out.println("--------Main Grid Pre.-----------");
+            // mainGrid.PrintOutGrid();
+            // System.out.println("--------Next Grid Pre------------");
+            // nextGrid.PrintOutGrid();
+            // System.out.println("-------------END-----------------");
+
             mainGrid.CopyOverSelf(nextGrid);
+            // System.out.println("Coppied over grid after this message....");
 
-            System.out.println("--------Main Grid Pre.-----------");
-            mainGrid.PrintOutGrid();
-            System.out.println("--------Next Grid Pre------------");
-            nextGrid.PrintOutGrid();
-            System.out.println("-------------END-----------------");
+            // System.out.println("--------Main Grid Pre.-----------");
+            // mainGrid.PrintOutGrid();
+            // System.out.println("--------Next Grid Pre------------");
+            // nextGrid.PrintOutGrid();
+            // System.out.println("-------------END-----------------");
 
-            input.nextLine();
+            // System.out.println(amountRemoved);
+
+            
         }
         
         System.out.println(total);
